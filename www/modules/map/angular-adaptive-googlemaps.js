@@ -45,7 +45,7 @@
           position: new google.maps.LatLng(address.latLong.split(",")[0],address.latLong.split(",")[1]),
           title: address.latLong,
           map: $scope.map,
-          url: "/#/tour/artDetail/" + address.markerData.artwork_id,
+          url: "/#/tour/artDetail/" + address.markerData._id.$value,
           draggable: false
         });
         google.maps.event.addListener(marker, 'click', function() {

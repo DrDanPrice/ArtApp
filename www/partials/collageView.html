@@ -1,21 +1,21 @@
 <ion-view>
     <ion-nav-buttons side='right' ng-controller="arCtrl">
         <input ng-model="$parent.query" type="search" placeholder="Search">
-        <button id="openOn" class="button button-icon button-clear" ng-click="loadAR(artworkGet(tourID), tourGet(tourID).tour_title, tourID)">
+        <button id="openOn" class="button button-icon button-clear" ng-click="loadAR(artworkGet(tourID), tourGet(tourID).name, tourID)">
             <img src="img/aricon.png" height="32px"/>
         </button>
     </ion-nav-buttons>
     <ion-content delegate-handle="sliderScroll" style="background: rgba(104, 152, 172, 0.1);bottom:64px;">
         <div class="description">
             <div class=" item-text-wrap">
-                <h1>{{curTour.tour_title}}</h1>
+                <h1>{{curTour.name}}</h1>
                 <div ng-show="curTour.description!=null">
                     {{curTour.description}}
                 </div>
             </div>
         </div>
         <div class="box collageView">
-            <div class="photo_container" ng-repeat="artOb in artworkGet(tourID) | filter:query" ui-sref="tour.artDetail({artID:{{artOb.artwork_id}}})">
+            <div class="photo_container" ng-repeat="artOb in artworkGet(tourID) | filter:query" ui-sref="tour.artDetail({artID:artOb._id})">
                 <img img-cache ic-src="{{genImList(artOb)}}" />
                 <h4 id="titleBox">{{artOb.title}}</h4>
             </div>

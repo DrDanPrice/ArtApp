@@ -43,6 +43,8 @@ appControllers.controller('menuCtrl', ['$rootScope', '$scope', '$http', 'tourInf
         //Uses local storage instead of http requests
         $scope.toursGet = tourInfo.getTours;
 
+        console.log($scope.toursGet());
+
         $scope.artworkGet = tourInfo.getArtwork;
 
         $scope.selectedMarker = null;
@@ -180,7 +182,7 @@ appControllers.controller('mainCtrl', ['$scope', '$rootScope', '$window', 'tourI
     }]);
 
 appControllers.controller('artDetailCtrl', ['$scope', '$rootScope', '$window', 'tourInfo', '$ionicSlideBoxDelegate', '$stateParams', '$ionicScrollDelegate', '$state', '$cordovaInAppBrowser', '$ionicModal', '$ionicSideMenuDelegate', 'artworkIn',
-    function ($scope, $rootScope, $window, tourInfo, $ionicSlideBoxDelegate, $stateParams, $ionicScrollDelegate, $state, $cordovaInAppBrowser, $ionicModal, $ionicSideMenuDelegate, artworkIn) {
+    function ($scope, $rootScope, $window, tourInfo, $ionicSlideBoxDelegate, $stateParams, $ionicScrollDelegate, $state, $cordovaInAppBrowser, $ionicModal, $ionicSideMenuDelegate) {
 
         $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
 

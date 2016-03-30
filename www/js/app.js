@@ -15,7 +15,7 @@ var publicArtApp = angular.module('publicArtApp', [
 
 publicArtApp.config(['$stateProvider', '$urlRouterProvider', '$compileProvider', 'ImgCacheProvider',
     function ($stateProvider, $urlRouterProvider, $compileProvider, ImgCacheProvider) {
-        $urlRouterProvider.otherwise("/tour/collage/1");
+        $urlRouterProvider.otherwise("/tour/collage/56e047cbb5a28dfc176b782c");
         $stateProvider
             .state('tour', {
                 url: "/tour",

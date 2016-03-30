@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="box collageView">
-        <div class="photo_container" ng-repeat="artOb in favoriteArt | filter:query" ui-sref="tour.artDetail({artID:{{artOb.artwork_id}}})">
+        <div class="photo_container" ng-repeat="artOb in favoriteArt | filter:query" ui-sref="tour.artDetail({artID:artOb._id})">
             <img img-cache ic-src="{{genImList(artOb)}}" />
             <div id="titleBox">
                 {{artOb.title}}

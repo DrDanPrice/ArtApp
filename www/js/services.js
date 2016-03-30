@@ -47,18 +47,10 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
                     $ionicLoading.hide();
                 })
             },
-            setTours: function (input) {
-
-                tours = input;
-            },
-            setArtwork: function (input) {
-
-                artwork = input;
-            },
             getTourByID: function (id) {
                 if (tours) {
                     var temp = tours.filter(function (element) {
-                        return element.tour_id == id;
+                        return element._id == id;
                     });
                     return temp[0];
                 }
@@ -68,7 +60,6 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
             }
         };
         outOb.getTours = function () {
-
             return tours;
         };
         outOb.getArtwork = function () {
@@ -82,7 +73,7 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
             if (tour) {
                 var tourArt = [];
                 for (var i = 0; i < tour.artwork_included.length; i++) {
-                    tourArt.push(outOb.getArtworkByID(tour.artwork_included[i]));
+                    tourArt.push(outOb.getArtworkByID(tour.artwork_included[i].$value));
                 }
                 return tourArt;
             }
@@ -96,7 +87,6 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
 utilServices.factory('favoriteService', function () {
     return {
         setFavorite: function (id, toggle) {
-            id = eval(id);
             var temp = [];
             if (localStorage.getObject("favorites") != null) {
                 temp = JSON.parse(localStorage.getObject("favorites"));
