@@ -39,8 +39,6 @@
 
     $scope.markersArray = [];
     var addMarker = function(address) {
-//        console.log(address.latLong, address.latLong.split(","));
-//      getLocation(address.latLong, function(location){
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(address.latLong.split(",")[0],address.latLong.split(",")[1]),
           title: address.latLong,
@@ -52,7 +50,6 @@
           window.location.href = marker.url;  
         });
         $scope.markersArray.push(marker);
-//      });
     };
 
     var removeMarkers = function() {

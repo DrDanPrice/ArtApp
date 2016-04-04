@@ -3,14 +3,12 @@
 /* Services */
 var utilServices = angular.module('utilModule', []);
 
-utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDelegate', '$ionicLoading', '$rootScope',
-    function ($q, $http, $filter, $ionicSlideBoxDelegate, $ionicLoading, $rootScope) {
+utilServices.factory('tourInfo',
+    function ($q, $http, $filter, $ionicSlideBoxDelegate, $ionicLoading) {
         var Connect = new Asteroid("localhost:3000");
 
         var tours = null;
         var artwork = null;
-        var toursLoaded = false;
-        var artworkLoaded = false;
 
         var outOb = {
             loadArtwork: function () {
@@ -21,6 +19,12 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
                 allSubscriptions.then(function () {
                     var artworkCollection = Connect.getCollection("tour_objects");
                     var artworkResult = artworkCollection.reactiveQuery({});
+
+                    // TEMPORARY UNTIL SERVER FOLDERS ARE MIGRATED
+                    artworkResult.result.forEach(function (art, $index) {
+                        art.artwork_id = $index + 1;
+                    });
+
                     artwork = artworkResult.result;
                     allSubscriptions.resolve(true);
                 });
@@ -82,7 +86,7 @@ utilServices.factory('tourInfo', ['$q', '$http', '$filter', '$ionicSlideBoxDeleg
             }
         };
         return outOb;
-    }]);
+    });
 
 utilServices.factory('favoriteService', function () {
     return {
@@ -91,7 +95,6 @@ utilServices.factory('favoriteService', function () {
             if (localStorage.getObject("favorites") != null) {
                 temp = JSON.parse(localStorage.getObject("favorites"));
             }
-
             if (toggle) {
                 temp.push(id);
             } else {
@@ -103,7 +106,7 @@ utilServices.factory('favoriteService', function () {
             localStorage.setObject("favorites", JSON.stringify(temp));
         },
         isFavorite: function (id) {
-            var temp = []
+            var temp = [];
             if (localStorage.getObject("favorites") != null) {
                 temp = JSON.parse(localStorage.getObject("favorites"));
             }
@@ -127,61 +130,29 @@ utilServices.factory('appStateStore', function () {
     var menuOpen = null;
     return {
         loadData: function () {
-
             toursOpen = JSON.parse(localStorage.getItem("toursOpen"));
             artworkOpen = JSON.parse(localStorage.getItem("artworkOpen"));
             menuOpen = JSON.parse(localStorage.getItem("menuOpen"));
 
             // If nothing in LS, set to default values
             if (toursOpen === null) {
-
                 localStorage.setItem("toursOpen", true);
                 toursOpen = true;
             }
             if (artworkOpen === null) {
-
                 localStorage.setItem("artworkOpen", false);
                 artworkOpen = false;
             }
             if (menuOpen === null) {
-
                 localStorage.setItem("menuOpen", true);
                 menuOpen = true;
             }
-
-        },
-        getToursOpen: function () {
-
-            return toursOpen;
-        },
-        setToursOpen: function (input) {
-
-            if (input != toursOpen) {
-
-                localStorage.setItem("toursOpen", input.toString());
-                toursOpen = input;
-            }
-        },
-        getArtworkOpen: function () {
-
-            return artworkOpen;
-        },
-        setArtworkOpen: function (input) {
-
-            if (input != artworkOpen) {
-
-                localStorage.setItem("artworkOpen", input.toString());
-                artworkOpen = input;
-            }
         },
         getMenuOpen: function () {
-
             return menuOpen;
         },
         setMenuOpen: function (input) {
-
             if (input != menuOpen) {
-
                 localStorage.setItem("menuOpen", input.toString());
                 menuOpen = input;
             }
