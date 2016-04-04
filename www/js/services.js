@@ -81,9 +81,7 @@ utilServices.factory('tourInfo',
                 }
                 return tourArt;
             }
-            else {
-                return null;
-            }
+            else return null;
         };
         return outOb;
     });
@@ -112,9 +110,7 @@ utilServices.factory('favoriteService', function () {
             }
 
             for (var q = 0; q < temp.length; q++) {
-                if (temp[q] == id) {
-                    return true;
-                }
+                if (temp[q] == id) return true;
             }
             return false;
         },

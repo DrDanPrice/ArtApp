@@ -5,16 +5,15 @@ var appControllers = angular.module('controllerModule', []);
 
 appControllers.controller('errorCtrl', function ($rootScope, $state, $ionicSideMenuDelegate) {
     $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
-
     $rootScope.prevState = $rootScope.curState;
     $rootScope.curState = $state.current.name;
 });
 
 appControllers.controller('introCtrl', function ($rootScope, $scope, $state, $ionicSlideBoxDelegate, $ionicSideMenuDelegate) {
     $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(false);
-
     $rootScope.curState = $state.current.name;
     $rootScope.prevState = $rootScope.curState;
+
     // Called to navigate to the main app
     $scope.startApp = function () {
         $state.go('tour.collage', {tourID: 1});
@@ -33,7 +32,6 @@ appControllers.controller('introCtrl', function ($rootScope, $scope, $state, $io
 
 appControllers.controller('menuCtrl', function ($rootScope, $scope, $http, tourInfo, $ionicSlideBoxDelegate, $state, appStateStore, $ionicSideMenuDelegate, $timeout, $ionicScrollDelegate, $location) {
     $scope.showAdd = false;
-    //Uses local storage instead of http requests
     $scope.toursGet = tourInfo.getTours;
     $scope.artworkGet = tourInfo.getArtwork;
     $scope.selectedMarker = null;
@@ -50,6 +48,7 @@ appControllers.controller('menuCtrl', function ($rootScope, $scope, $http, tourI
             appStateStore.setMenuOpen(true);
         }, 1000);
     }
+
     $scope.resizeScroll = function () {
         $ionicScrollDelegate.$getByHandle('menuScroll').resize();
     };
@@ -60,14 +59,13 @@ appControllers.controller('menuCtrl', function ($rootScope, $scope, $http, tourI
 });
 
 appControllers.controller('collageCtrl', function ($scope, $rootScope, $window, tourInfo, $ionicSlideBoxDelegate, $stateParams, $timeout, artworkIn, toursIn, $ionicScrollDelegate, $state, $ionicModal, $ionicSideMenuDelegate) {
-    var isFirst = localStorage.getItem("ARTourFirstLaunch");
+    $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
 
+    var isFirst = localStorage.getItem("ARTourFirstLaunch");
     if (isFirst != "true") {
         localStorage.setItem("ARTourFirstLaunch", "true");
         $state.go('tour.intro');
     }
-
-    $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
 
     $rootScope.prevState = $rootScope.curState;
     $rootScope.curState = $state.current.name;
@@ -149,9 +147,11 @@ appControllers.controller('collageCtrl', function ($scope, $rootScope, $window, 
     }).then(function (modal) {
         $scope.modal2 = modal;
     });
+
     $scope.openModal2 = function () {
         $scope.modal2.show();
     };
+
     $scope.closeModal2 = function () {
         $scope.modal2.hide();
     };
@@ -241,7 +241,6 @@ appControllers.controller('favoriteCtrl', function ($scope, $rootScope, $window,
 
     $scope.genImList = function (artOb) {
         var primeImage = artOb.image.split(",")[0].replace(/.png/g, '_thumb.png');
-
         return "http://www.housuggest.org/images/ARtour/" + artOb.artwork_id + "/" + primeImage;
     };
 
@@ -272,33 +271,6 @@ appControllers.controller('arCtrl', function ($scope, $rootScope, $window, tourI
 
     $rootScope.prevState = $rootScope.curState;
     $rootScope.curState = $state.current.name;
-
-    $scope.ARModeActive = app.isLoaded;
-
-    $scope.loadAR = function (JSON, TourName, TourID) {
-        $stateParams.AR = false;
-        if ($scope.ARModeActive) {
-            app.loadARchitectWorld(null, JSON, TourName, TourID);
-        } else {
-            app.loadARchitectWorld(getSamplePath(0, 0), JSON, TourName, TourID);
-        }
-        if ($ionicSideMenuDelegate.isOpenLeft()) {
-            $ionicSideMenuDelegate.$getByHandle('main-menu').toggleLeft();
-        }
-    };
-
-    $scope.returnToAR = function () {
-        app.loadARchitectWorld();
-    };
-
-    var onBackKeyDown = function () {
-        $scope.returnToAR();
-        document.removeEventListener("backbutton", onBackKeyDown, false);
-    };
-
-    if ($scope.ARModeActive) {
-        document.addEventListener("backbutton", onBackKeyDown, false);
-    }
 });
 
 appControllers.controller('aboutCtrl', function ($scope, $rootScope, $ionicSideMenuDelegate, $state) {

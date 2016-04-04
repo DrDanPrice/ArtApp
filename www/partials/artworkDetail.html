@@ -2,9 +2,6 @@
     <ion-nav-buttons side='right' ng-controller="arCtrl">
         <label class="item-input-wrapper" style="display:none">
         </label>
-        <button class="button button-icon button-clear" ng-show="ARModeActive" ng-click="returnToAR()">
-            <img src="img/aricon.png" height="32px"/>
-        </button>
     </ion-nav-buttons>
     <ion-content delegate-handle="detailScroll" style="bottom:79px;">
         <div class="row responsive-sm">
@@ -16,8 +13,6 @@
                     <h1 ng-controller="favoriteCtrl">
                         <span style="margin:auto">{{detailArt.title}}</span>
                         <button class="button button-icon button-clear" ng-click="toggleFavorite()" style="float: right;">
-    <!--                         <img src="img/fav_no.svg" height="40px" ng-show="!isFavorite"/>
-                            <img src="img/fav_yes.svg" height="40px" ng-show="isFavorite"/> -->
                             <i class="icon ion-heart" ng-class="{'isFavorite':isFavorite}"></i>
                         </button>
                     </h1>
