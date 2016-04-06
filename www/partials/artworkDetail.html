@@ -1,4 +1,4 @@
-<ion-view> 
+<ion-view>
     <ion-nav-buttons side='right' ng-controller="arCtrl">
         <label class="item-input-wrapper" style="display:none">
         </label>
@@ -6,13 +6,15 @@
     <ion-content delegate-handle="detailScroll" style="bottom:79px;">
         <div class="row responsive-sm">
             <div class="col">
-            <img img-cache class="item" ic-src="{{genImList(detailArt)}}" style="max-height:84%;max-width:100%; min-width: 250px; margin:auto; border:none;">
+                <img img-cache class="item" ic-src="{{genImList(detailArt)}}"
+                     style="max-height:84%;max-width:100%; min-width: 250px; margin:auto; border:none;">
             </div>
             <div class="col">
                 <div class="item item-text-wrap">
                     <h1 ng-controller="favoriteCtrl">
                         <span style="margin:auto">{{detailArt.title}}</span>
-                        <button class="button button-icon button-clear" ng-click="toggleFavorite()" style="float: right;">
+                        <button class="button button-icon button-clear" ng-click="toggleFavorite()"
+                                style="float: right;">
                             <i class="icon ion-heart" ng-class="{'isFavorite':isFavorite}"></i>
                         </button>
                     </h1>
@@ -20,33 +22,16 @@
                     <br/>
                     <p ng-hide="!detailArt.description || detailArt.description==''">{{detailArt.description}}</p>
                 </div>
-                <div ng-click="resizeScroll(); artistInfo=!artistInfo;" class="item item-icon-left item-divider" ng-init="artistInfo=true">
-                    <i class="icon ion-person"></i>
-                    Artist Info
-                </div>
-                <div class="item item-text-wrap" ng-show="artistInfo">
-                    <p ng-hide="!detailArt.artist_name || detailArt.artist_name==''">Artist: {{detailArt.artist_name}}</p>
-                    <p ng-hide="!detailArt.artist_dob || detailArt.artist_dob==''">Date of Birth: {{detailArt.artist_dob}}</p>
-                    <p ng-hide="!detailArt.artist_pob || detailArt.artist_pob==''">Place of Birth: {{detailArt.artist_pob}}</p>
-                    <p ng-hide="!detailArt.artist_website || detailArt.artist_website==''">Website: <a ng-click="goToLink('{{detailArt.artist_website}}')" style="color:blue;text-decoration: underline;">{{detailArt.artist_website}}</a></p>
-                </div>
-                <div ng-click="resizeScroll(); locationInfo=!locationInfo;" class="item item-icon-left item-divider" ng-init="locationInfo=true">
-                    <i class="icon ion-location"></i>
-                    Location
-                </div>
-                <div class="item item-text-wrap" ng-show="locationInfo">
-                    <p ng-hide="!detailArt.location_name || detailArt.location_name==''">Location: {{detailArt.location_name}}</p>
-                    <p ng-hide="!detailArt.location_campus || detailArt.location_campus==''">Campus: {{detailArt.location_campus}}</p>
-                    <p ng-hide="!detailArt.availability || detailArt.availability==''">Availability: {{detailArt.availability}}</p>
-                </div>
-                <div ng-click="resizeScroll(); charInfo=!charInfo;" class="item item-icon-left item-divider" ng-init="charInfo=true">
-                    <i class="icon ion-clipboard"></i>
-                    Characteristics
-                </div>
-                <div class="item item-text-wrap" ng-show="charInfo">
-                    <p ng-hide="!detailArt.date_made || detailArt.date_made==''">Date Made: {{detailArt.date_made}}</p>
-                    <p ng-hide="!detailArt.medium || detailArt.medium==''">Medium: {{detailArt.medium}}</p>
-                    <p ng-hide="!detailArt.dimensions || detailArt.dimensions==''">Dimensions: {{detailArt.dimensions}}</p>
+                <div ng-repeat="section in detailArt.display_sections">
+                    <div ng-click="resizeScroll(); artistInfo=!artistInfo;" class="item item-divider"
+                         ng-init="artistInfo=true">
+                        {{section.name}}
+                    </div>
+                    <div class="item item-text-wrap" ng-show="artistInfo">
+                        <div ng-repeat="data in section.section_data">
+                            <p><b>{{getKeys(data)[0]}}:</b> {{data[getKeys(data)[0]]}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,10 +41,5 @@
             <i class="icon ion-earth"></i>
             Show in Map
         </div>
-<!--
-        <div ng-show="mapShow">
-            <googlemaps class="google-maps" options="map"></googlemaps>
-        </div>
--->
-</ion-footer-bar>
+    </ion-footer-bar>
 </ion-view>
