@@ -31,24 +31,22 @@ html, body{
     -webkit-column-gap:   5px;
     -moz-column-gap:      5px;
     column-gap:           5px;
-    padding: 0px;
+    padding: 0;
 }
 .box * {
-    max-width: 100%
-    display: inline-block;
+    max-width: 100%;
 }
 .box * img {
     /* Just in case there are inline attributes */
     width: 100% !important;
     height: auto !important;
-    margin-bottom: 0px;
     margin-bottom: 48px;
 }
 .photo_container {
     position: relative;
-    right: 0px;
-    bottom: 0px;
-    margin-bottom: 0px;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 0;
 }
 .photo_container #titleBox {
     position: absolute;
