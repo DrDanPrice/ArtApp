@@ -59,6 +59,9 @@ appControllers.controller('menuCtrl', function ($rootScope, $scope, $http, tourI
 });
 
 appControllers.controller('collageCtrl', function ($scope, $rootScope, $window, tourInfo, $ionicSlideBoxDelegate, $stateParams, $timeout, artworkIn, toursIn, $ionicScrollDelegate, $state, $ionicModal, $ionicSideMenuDelegate) {
+    if ($stateParams.tourID == "" || tourInfo.getTourByID($stateParams.tourID) == null) {
+        $state.go('tour.collage', {tourID: tourInfo.getTours()[0]._id});
+    }
     $ionicSideMenuDelegate.$getByHandle('main-menu').canDragContent(true);
 
     var isFirst = localStorage.getItem("ARTourFirstLaunch");
