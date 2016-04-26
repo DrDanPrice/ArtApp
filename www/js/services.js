@@ -5,7 +5,7 @@ var utilServices = angular.module('utilModule', []);
 
 utilServices.factory('tourInfo',
     function ($q, $http, $filter, $ionicSlideBoxDelegate, $ionicLoading) {
-        var Connect = new Asteroid("localhost:3000");
+        var Connect = new Asteroid("localhost:3001");
 
         var tours = null;
         var artwork = null;
@@ -77,7 +77,7 @@ utilServices.factory('tourInfo',
             if (tour) {
                 var tourArt = [];
                 for (var i = 0; i < tour.artwork_included.length; i++) {
-                    tourArt.push(outOb.getArtworkByID(tour.artwork_included[i].$value));
+                    tourArt.push(outOb.getArtworkByID(tour.artwork_included[i]));
                 }
                 return tourArt;
             }
