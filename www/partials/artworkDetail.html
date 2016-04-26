@@ -29,7 +29,9 @@
                     </div>
                     <div class="item item-text-wrap" ng-show="artistInfo">
                         <div ng-repeat="data in section.section_data">
-                            <p><b>{{getKeys(data)[0]}}:</b> {{data[getKeys(data)[0]]}}</p>
+                            <p ng-hide="data[getKeys(data)[0]] == null || data[getKeys(data)[0]] == ''"><b
+                                    ng-hide="getKeys(data)[0] == ''">{{getKeys(data)[0]}}
+                                :</b> {{data[getKeys(data)[0]]}}</p>
                         </div>
                     </div>
                 </div>
