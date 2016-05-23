@@ -180,10 +180,6 @@ appControllers.controller('artDetailCtrl', function ($scope, $rootScope, $window
         $ionicScrollDelegate.$getByHandle('detailScroll').resize();
     };
 
-    $scope.getKeys = function (i) {
-        return Object.keys(i);
-    };
-
     var markersArr = [];
     var tempMarker = [];
     tempMarker.latLong = $scope.detailArt.location_lat + ", " + $scope.detailArt.location_long;

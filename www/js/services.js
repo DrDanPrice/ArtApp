@@ -5,7 +5,7 @@ var utilServices = angular.module('utilModule', []);
 
 utilServices.factory('tourInfo',
     function ($q, $http, $filter, $ionicSlideBoxDelegate, $ionicLoading) {
-        var Connect = new Asteroid("localhost:3001");
+        var Connect = new Asteroid("localhost:3000");
 
         var tours = null;
         var artwork = null;
