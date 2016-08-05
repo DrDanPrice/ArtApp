@@ -8,6 +8,7 @@ The code is using [Ionic Framework](http://ionicframework.com/) and [Wikitude SD
 
 bower `npm install -g bower`
 
+ionic - `npm install -g ionic`
 
 
 ##Getting started for Development:
@@ -17,7 +18,7 @@ bower `npm install -g bower`
 2. Run `bower install`. Reads bower.json and installs local dependencies into the folder `www/lib`
 
 ###Run in browser or Phonegap Developer App
- 
+
 7. Run `ionic serve`.
 This uses `ionic.xml` and will serve as local node server. Live updates when you make changes to the code. This works with Phonegap Developer App. Wikitude will NOT function
 
